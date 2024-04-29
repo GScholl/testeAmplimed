@@ -1,0 +1,131 @@
+.previsao-atual {
+    backdrop-filter: blur(3px) saturate(149%);
+    -webkit-backdrop-filter: blur(3px) saturate(149%);
+    background-color: rgba(255, 255, 255, 0.51);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+
+    width: 100%;
+}
+
+/* resposta da API weather codes */
+.bg-113 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 30%, 65%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(192, 69%, 56%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(56, 89%, 48%) 0, transparent 55%);
+}
+.bg-116 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 12%, 57%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(192, 28%, 57%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(56, 81%, 62%) 0, transparent 55%);
+}
+.bg-119,
+.bg-122,
+.bg-176 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 12%, 57%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(192, 28%, 57%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(214, 81%, 62%) 0, transparent 55%);
+}
+.bg-card-principal {
+    backdrop-filter: blur(4px) saturate(180%);
+    -webkit-backdrop-filter: blur(4px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.26);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
+}
+
+.bg-143 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 12%, 57%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(195, 8%, 70%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(213, 7%, 53%) 0, transparent 55%);
+}
+
+.bg-179,
+.bg-182,
+.bg-185 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 12%, 57%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(195, 8%, 70%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(0, 0%, 97%) 0, transparent 55%);
+}
+
+.bg-200 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(61, 61%, 26%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(212, 58%, 36%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(248, 71%, 37%) 0, transparent 55%);
+}
+.bg-227,
+.bg-230,
+.bg-248,
+.bg-260 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(225, 10%, 77%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(180, 2%, 82%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(0, 0%, 97%) 0, transparent 55%);
+}
+
+.bg-263,
+.bg-266,
+.bg-281,
+.bg-284 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 12%, 57%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(192, 40%, 57%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(214, 81%, 62%) 0, transparent 55%);
+}
+.bg-293,
+.bg-299,
+.bg-302,
+.bg-296,
+.bg-305,
+.bg-308 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 30%, 65%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 100% 35%, hsl(212, 58%, 36%) 0, transparent 55%),
+        radial-gradient(at 0% 65%, hsl(248, 71%, 37%) 0, transparent 55%);
+}
+.bg-311 {
+    background-image: radial-gradient(
+            at 95% 35%,
+            hsl(212, 58%, 36%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 57% 53%, hsl(222, 30%, 65%) 0, transparent 55%),
+        radial-gradient(at 95% 35%, hsl(212, 58%, 36%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(248, 67%, 63%) 0, transparent 55%);
+}
+.bg-container-previsao {
+    background-color: rgb(163, 192, 226);
+}

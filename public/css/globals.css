@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+    --dark: #363636;
+    --light-dark: #eae7e7;
+
+    --bg-whiteless: #fcf5ed;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+
+    font-style: normal;
+}
+
+*::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    background: white;
+}
+
+*::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    background-color: #3e79be;
+
+    border-radius: 20px;
+
+    border: 3px solid white;
+}
+#nav-logo {
+    width: 10em;
+}
+.h-60vh {
+    height: 60vh;
+}
+.h-100vh {
+    height: 100vh;
+}
+.h-10vh {
+    height: 10vh;
+}
+.h-20vh {
+    height: 20vh;
+}
+.h-30vh {
+    height: 30vh;
+}
+.h-24vh {
+    height: 24vh;
+}
+.mh-22vh {
+    min-height: 22vh;
+}
+
+.form-control:focus {
+    background-color: var(--light-dark);
+}
+.form-control {
+    background-color: var(--light-dark);
+}
+.form-control.glass {
+    backdrop-filter: blur(4px) saturate(180%);
+    -webkit-backdrop-filter: blur(4px) saturate(180%);
+    background-color: rgba(255, 255, 255, 0.26);
+}
+.br-2 {
+    border-radius: 20px;
+}
+.text-bold {
+    font-weight: bold;
+}
+.foto-perfil {
+    width: 32px;
+    height: 32px;
+    background-color: rgb(182, 216, 248);
+    color: rgb(44, 100, 239);
+}
+.success-field {
+    color: #57c60d;
+    border: 1px solid #57c60d !important;
+}
+
+.error-field {
+    color: rgb(234, 88, 88) !important;
+    border: 1px solid rgb(234, 88, 88) !important;
+}
+
+span.error-message {
+    color: rgb(234, 88, 88) !important;
+}
+.weather-icon {
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    height: 7vh;
+    object-fit: fill;
+}
