@@ -1,3 +1,5 @@
+
+const base_url = "http://127.0.0.1:8000";
 function pegarCoordenadasIp() {
     var lat_padrao = -22.981361;
     var long_padrao = -43.223176;

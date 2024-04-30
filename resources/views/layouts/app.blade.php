@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <header class="p-1  bg-light border-bottom">
+    <header class="p-1  bg-white  b-shadow-nav">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/"
@@ -25,31 +25,22 @@
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center ps-2 pe-2 mb-md-0">
-                    <li><a href="#" class="nav-link px-2 link-primary">Previsão Atual</a></li>
-                    <li><a href="#" class="nav-link px-2 link-secondary">Histórico de pesquisas</a></li>
-                    <li><a href="#" class="nav-link px-2 link-secondary">Previsões Salvas</a></li>
+                    <li><a href="{{ route('previsao.atual') }}"
+                            class="{{ Request::is('previsao/atual') ? 'link-primary' : 'link-secondary' }} nav-link px-2 ">Previsão
+                            Atual</a></li>
+                    <li><a href="{{ route('previsao.compare') }}" class="nav-link px-2 link-secondary">Comparar
+                            previsões</a></li>
+                    <li><a href="{{ route('previsao.listar') }}"
+                            class=" {{ Request::is('previsao/listar') ? 'link-primary' : 'link-secondary' }} nav-link px-2 ">Previsões
+                            Salvas</a></li>
                 </ul>
 
 
 
                 <div class="dropdown text-end">
-                    <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-                        id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div
-                            class=" foto-perfil text-center d-flex justify-content-center align-items-center  rounded-circle">
-                            <i class="fa fa-user"></i>
-
-
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu text-small">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><a class="dropdown-item" href="#">Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                    <ul class="nav">
+                        <li><a href="{{ route('index') }}" class="nav-link px-2 link-secondary"><i
+                                    class="fa fa-right-from-bracket"></i></a></li>
                     </ul>
                 </div>
             </div>

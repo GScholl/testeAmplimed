@@ -20,7 +20,7 @@ body::-webkit-scrollbar {
 
 *::-webkit-scrollbar-track,
 body::-webkit-scrollbar-track {
-    background: white;
+    background: transparent;
 }
 
 *::-webkit-scrollbar-thumb,
@@ -29,13 +29,67 @@ body::-webkit-scrollbar-thumb {
 
     border-radius: 20px;
 
-    border: 3px solid white;
+    border: 1px solid transparent;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+}
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
+    top: 50%;
+    left: 5px;
+    height: 1em;
+    width: 1em;
+    margin-top: -9px;
+    display: block;
+    position: absolute;
+    color: white;
+    border: 0.15em solid white;
+    border-radius: 1em;
+    box-shadow: 0 0 0.2em #444;
+    box-sizing: content-box;
+    text-align: center;
+    text-indent: 0 !important;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 1em;
+    content: "+";
+    background-color: #0f61dd;
+}
+table.dataTable.dtr-inline.collapsed
+    > tbody
+    > tr.parent
+    > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed
+    > tbody
+    > tr.parent
+    > th.dtr-control:before {
+    content: "-";
+    background-color: #0947a3;
+}
+ul.dtr-details {
+    list-style: none;
 }
 #nav-logo {
     width: 10em;
 }
 .h-60vh {
     height: 60vh;
+}
+.h-50vh {
+    height: 50vh;
+}
+.h-80vh{
+    height:80vh;
+}
+.mh-80vh{
+    min-height:80vh;
+}
+.mh-92vh{
+    min-height: 92vh;
 }
 .h-100vh {
     height: 100vh;
@@ -97,4 +151,136 @@ span.error-message {
     aspect-ratio: 1/1;
     height: 7vh;
     object-fit: fill;
+}
+
+/* resposta da API weather codes */
+.bg-113 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 30%, 65%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(192, 69%, 56%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(56, 89%, 48%) 0, transparent 55%);
+}
+.bg-116 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 12%, 57%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(192, 28%, 57%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(56, 81%, 62%) 0, transparent 55%);
+}
+.bg-119,
+.bg-122,
+.bg-176 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 12%, 57%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(192, 28%, 57%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(214, 81%, 62%) 0, transparent 55%);
+}
+
+
+.bg-143 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 12%, 57%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(195, 8%, 70%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(213, 7%, 53%) 0, transparent 55%);
+}
+
+.bg-179,
+.bg-182,
+.bg-185 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 12%, 57%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(195, 8%, 70%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(0, 0%, 97%) 0, transparent 55%);
+}
+
+.bg-200,
+.bg-386,
+.bg-386 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(61, 61%, 26%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(212, 58%, 36%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(248, 71%, 37%) 0, transparent 55%);
+}
+.bg-227,
+.bg-230,
+.bg-248,
+.bg-260,
+.bg-326,
+.bg-323,
+.bg-329,
+.bg-338,
+.bg-335,
+.bg-350,
+.bg-362,
+.bg-365,
+.bg-368,
+.bg-371,
+.bg-374,
+.bg-365,
+.bg-392,
+.bg-395 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(225, 10%, 77%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(180, 2%, 82%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(0, 0%, 97%) 0, transparent 55%);
+}
+
+.bg-263,
+.bg-266,
+.bg-281,
+.bg-284 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 12%, 57%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 95% 35%, hsl(192, 40%, 57%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(214, 81%, 62%) 0, transparent 55%);
+}
+.bg-293,
+.bg-299,
+.bg-302,
+.bg-296,
+.bg-305,
+.bg-308 {
+    background-image: radial-gradient(
+            at 57% 53%,
+            hsl(222, 30%, 65%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 100% 35%, hsl(212, 58%, 36%) 0, transparent 55%),
+        radial-gradient(at 0% 65%, hsl(248, 71%, 37%) 0, transparent 55%);
+}
+.bg-311,.bg-314,.bg-317,.bg-320 {
+    background-image: radial-gradient(
+            at 95% 35%,
+            hsl(212, 58%, 36%) 0,
+            transparent 55%
+        ),
+        radial-gradient(at 57% 53%, hsl(222, 30%, 65%) 0, transparent 55%),
+        radial-gradient(at 95% 35%, hsl(212, 58%, 36%) 0, transparent 55%),
+        radial-gradient(at 22% 65%, hsl(248, 67%, 63%) 0, transparent 55%);
+}
+.b-shadow-nav{
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 }

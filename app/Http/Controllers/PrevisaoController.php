@@ -7,16 +7,29 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use App\Models\Pesquisa;
 use App\Models\Previsao;
-
+use App\Models\CondicaoClimatica;
 use Illuminate\Support\Facades\Validator;
 
 class PrevisaoController extends Controller
 {
-
-
     private $acessToken = 'b3188e324b830cf1240371528ff82881';
     private $apiUrl = 'http://api.weatherstack.com/';
 
+    private $errorCodes = [
+        404 => 'Recurso solicitado pelo usuário não existe.',
+        101 => 'Chave de acesso fornecida pelo usuário é inválida.',
+        102 => 'Conta de usuário está inativa ou bloqueada.',
+        103 => 'Função da API solicitada pelo usuário não existe.',
+        104 => 'Limite mensal de solicitações da assinatura do usuário foi atingido.',
+        105 => 'A assinatura atual do usuário não suporta esta função da API.',
+        601 => 'Um valor de consulta inválido (ou ausente) foi especificado.',
+        602 => 'A solicitação da API não retornou nenhum resultado.',
+        603 => 'Dados históricos não são suportados no plano de assinatura atual.',
+        604 => 'Consultas em massa não são suportadas no plano de assinatura atual.',
+        608 => 'Foi especificado um valor de dias de previsão inválido.',
+        609 => 'Dados de previsão do tempo não são suportados no plano de assinatura atual.',
+        615 => 'A solicitação da API falhou.'
+    ];
     public function index(Request $request)
     {
 
@@ -25,13 +38,49 @@ class PrevisaoController extends Controller
             $pesquisa = new Pesquisa();
             $pesquisa->query = $cidade;
             $pesquisa->save();
+
             $previsao = $this->getPrevisaoAtual($cidade);
         } else {
             $previsao =  $this->getPrevisaoAtual($this->getCoordenadasIp());
         }
-    
+
+        $previsao['current']['descricao_traduzida'] = CondicaoClimatica::where('codigo', '=', $previsao['current']['weather_code'])->first()->descricao ?? null;
+        if (isset($previsao['success']) && !$previsao['success']) {
+            $previsao['mensagem_traduzida'] = $this->getInfoErrorTraduzido($previsao['error']['code']);
+        }
+
+        $previsao['historicos_pesquisas'] = Pesquisa::orderBy('created_at', 'desc')->get();
 
         return view('previsao.index', $previsao);
+    }
+
+    public function compararPrevisoes(Request $request)
+    {
+        $primeiraCidade = $request->input('cidade1');
+        $segundaCidade = $request->input('cidade2');
+        $previsoes = [];
+        if ($primeiraCidade) {
+            $previsoes['primeiraPrevisao'] = $this->getPrevisaoAtual($primeiraCidade);
+            if (isset($previsoes['primeiraPrevisao']['current']['weather_code'])) {
+
+                $previsoes['primeiraPrevisao']['current']['descricao_traduzida'] = CondicaoClimatica::where('codigo', '=', $previsoes['primeiraPrevisao']['current']['weather_code'])->first()->descricao ?? null;
+            }
+            if (isset($previsoes['primeiraPrevisao']['success']) && !$previsoes['primeiraPrevisao']['success']) {
+                $previsoes['primeiraPrevisao']['mensagem_traduzida'] = $this->getInfoErrorTraduzido($previsoes['primeiraPrevisao']['error']['code']);
+            }
+        }
+        if ($segundaCidade) {
+            $previsoes['segundaPrevisao'] = $this->getPrevisaoAtual($segundaCidade);
+            if (isset($previsoes['segundaPrevisao']['current']['weather_code'])) {
+
+                $previsoes['segundaPrevisao']['current']['descricao_traduzida'] = CondicaoClimatica::where('codigo', '=', $previsoes['segundaPrevisao']['current']['weather_code'])->first()->descricao ?? null;
+            }
+            if (isset($previsoes['primeiraPrevisao']['success']) && !$previsoes['primeiraPrevisao']['success']) {
+                $previsoes['segundaPrevisao']['mensagem_traduzida'] = $this->getInfoErrorTraduzido($previsoes['segundaPrevisao']['error']['code']);
+            }
+        }
+        
+        return view('previsao.compare', $previsoes);
     }
 
     public function getPrevisaoAtual($local)
@@ -39,12 +88,8 @@ class PrevisaoController extends Controller
 
         $response = Http::get("{$this->apiUrl}current?access_key={$this->acessToken}&query=$local&units=m");
 
-        if ($response->successful()) {
-            return $response->json();
-        } else {
 
-            return ['error' => true, 'statusCode' => $response->status(), 'body' => $response->body()];
-        }
+        return $response->json();
     }
     public function nova(Request $request)
     {
@@ -60,14 +105,14 @@ class PrevisaoController extends Controller
             'data_local' => 'required|date',
             'vento' => 'required|numeric',
         ];
-       
+
         $validator = Validator::make($request->all(), $rules);
-       
+
         if ($validator->fails()) {
             return redirect()->back()->with('error', 'Ocorreu um erro ao salvar a previsão. Por favor, tente novamente.');
         }
 
-    
+
         $previsao = new Previsao();
         $previsao->cidade = $request->cidade;
         $previsao->temperatura = $request->temperatura;
@@ -79,20 +124,31 @@ class PrevisaoController extends Controller
         $previsao->visibilidade = $request->visibilidade;
         $previsao->data_local = $request->data_local;
         $previsao->vento = $request->vento;
-        $previsao->dia_noite = $request->dia_noite == "yes" ;
-        
-        
-        if($previsao->save()){
+        $previsao->dia_noite = $request->dia_noite == "yes";
+
+
+        if ($previsao->save()) {
 
             return redirect()->back()->with('success', 'Previsão salva com sucesso!');
-        }else{
+        } else {
 
             return redirect()->back()->with('error', 'Houve um erro ao salvar a previsão!');
         }
-      
     }
+    public function previsoesSalvas()
+    {
 
+        $previsoes = Previsao::orderBy('created_at', 'desc')->get();
+        return view('previsao.listar', compact('previsoes'));
+    }
+    public function previsaoSalva($id)
+    {
+        $previsao = Previsao::find($id);
 
+        if (is_null($previsao)) return redirect()->back()->with('error', 'Previsão não encontrada!');
+        $previsao->descricao_traduzida = CondicaoClimatica::where('codigo', '=', $previsao->codigo_previsao)->first()->descricao ?? null;
+        return view('previsao.previsao', compact('previsao'));
+    }
 
     public function getCoordenadasIp()
     {
@@ -104,6 +160,15 @@ class PrevisaoController extends Controller
 
             return "Chapecó";
         }
+    }
+
+    public function getInfoErrorTraduzido($codigo)
+    {
+        if ($this->errorCodes[$codigo]) {
+
+            return  $this->errorCodes[$codigo];
+        }
+        return "Houve um erro desconhecido, por favor tente novamente mais tarde";
     }
 
     public function getDados()
