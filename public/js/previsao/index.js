@@ -66,53 +66,76 @@ $("#pesquisaPrevisao").validate({
     },
 });
 
-
-$("#formEdicaoTarefa").validate({
+$("#formPesquisaHistorico").validate({
     rules: {
-      titulo: {
-        required: true,
-        minlength: 3,
-      },
-      
+        query: {
+            required: true,
+            minlength: 3,
+        },
     },
     messages: {
-      titulo: {
-        required: "Por favor, insira o titulo.",
-        minlength: "O titulo deve ter pelo menos 3 caracteres.",
-      },
-     
+        query: {
+            required: "Por favor, insira a pesquisa.",
+            minlength: "A pesquisa deve ter pelo menos 3 caracteres.",
+        },
     },
     errorElement: "span",
     errorClass: "error-message",
     highlight: function (element, errorClass, validClass) {
-      jQuery(element).addClass("error-field");
+        jQuery(element).addClass("error-field");
     },
     unhighlight: function (element, errorClass, validClass) {
-      jQuery(element).removeClass("error-field");
+        jQuery(element).removeClass("error-field");
     },
     success: function (label, element) {
-      // Adiciona uma classe de sucesso ao elemento
-      jQuery(element).addClass("success-field");
-      // Remove a mensagem de erro
-      label.remove();
+        jQuery(element).addClass("success-field");
+
+        label.remove();
     },
     submitHandler: async function (form) {
-      event.preventDefault();
-      let dados = jQuery(form).serializeArray();
-   
-      $.ajax({
-        url: `${base_url}/tarefa/editar`,
-        method: "post",
-        data: dados,
-        success: function (res) {
-          
-        },
-        error: function (err) {
-        
-        },
-      });
+        event.preventDefault();
+        let dados = jQuery(form).serializeArray();
+
+        $.ajax({
+            url: `${base_url}/previsao/historicos/pesquisar`,
+            method: "get",
+            data: dados,
+            success: function (res) {
+                console.log(res);
+                $("#listar-historicos").empty();
+                if (res.length > 0) {
+                    $.each(res, function (index, value) {
+                        let item_pesquisa = ` <div id="item${value.id}"class="glass-item rounded p-2 d-flex flex-row justify-content-between">
+                    <i>${value.query}</i> <a onclick="excluirPesquisa(${value.id})" role="button"
+                        class="btn btn-sm btn-light"><i class="fa fa-xmark"></i></a>
+                </div>`;
+                        $("#listar-historicos").append(item_pesquisa);
+                    });
+                } else {
+                    $("#listar-historicos").append(
+                        "<p>Não há nenhuma pesquisa correspondente</p>"
+                    );
+                }
+            },
+            error: function (err) {},
+        });
     },
-  });
+});
+
+function excluirPesquisa(id_pesquisa) {
+    $.ajax({
+        url: `${base_url}/previsao/historicos/delete/${id_pesquisa}`,
+        method: "get",
+        success: function (res) {
+            if (res) {
+                $(`#item${id_pesquisa}`).fadeOut(400, function() {
+                    $(this).remove();
+                });
+               
+            }
+        },
+    });
+}
 function abrirModalHistorico() {
     $("#HistoricoDePesquisasModal").modal("show");
 }

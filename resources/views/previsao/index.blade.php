@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('links')
-
     <link rel="stylesheet" href="{{ asset('css/previsao/index.css') }}">
 @endsection
 @section('conteudo')
@@ -15,16 +14,18 @@
                 <div class="modal-body">
                     <form action="" id="formPesquisaHistorico" method="get">
                         <label for="historico"><b>Pesquisar Histórico</b></label>
-                        <div class="d-flex flex-row gap-2"><input type="text"
-                                class="form-control glass flex-grow-1"><button type="submit" class="btn btn-success"><i
-                                    class="fa fa-magnifying-glass"></i></button></div>
+                        <div class="d-flex flex-row gap-2">
+                            <input name="query" id="query" type="text" class="form-control glass flex-grow-1">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-magnifying-glass"></i></button>
+                        </div>
                     </form>
 
                     <div id="listar-historicos" class=" mt-3 gap-2 d-flex  p-1 flex-column overflow-auto h-60vh">
                         @foreach ($historicos_pesquisas as $pesquisa)
-                            <div class="glass-item rounded p-2 d-flex flex-row justify-content-between">
-                                <i>{{ $pesquisa->query }}</i> <a href="" role="button"
-                                    class="btn btn-sm btn-light"><i class="fa fa-xmark"></i></a>
+                            <div
+                                id="item{{ $pesquisa->id }}"class="glass-item rounded p-2 d-flex flex-row justify-content-between">
+                                <i>{{ $pesquisa->query }}</i> <a onclick="excluirPesquisa({{ $pesquisa->id }})"
+                                    role="button" class="btn btn-sm btn-light"><i class="fa fa-xmark"></i></a>
                             </div>
                         @endforeach
                         @if (count($historicos_pesquisas) == 0)
@@ -48,8 +49,7 @@
                 <div class="row">
 
                     <div class="col-lg-8 offset-lg-2 mt-2 p-0">
-                        <div
-                            class="d-flex previsao-atual  align-items-start rounded pt-2  p-2 pb-2 justify-content-center">
+                        <div class="d-flex previsao-atual  align-items-start rounded pt-2  p-2 pb-2 justify-content-center">
                             <div class="p-2 w-100">
 
 
@@ -57,7 +57,7 @@
 
                                     <div class="row">
                                         <div class="col-md-5 " id="div-cep">
-                                            <label for="cep"><b>Cep</b></label>
+                                            <label for="cep"><b>CEP</b></label>
                                             <input type="text" name="cep"
                                                 value="{{ request()->get('cep') ?? '' }}"id="cep"
                                                 class="form-control glass">
@@ -100,10 +100,11 @@
                                 class="container-previsao   rounded bg-card-principal p-3  d-flex flex-column justify-content-center align-items-center">
                                 <div class="w-100 justify-content-between  align-items-center d-flex gap-1 mb-2">
                                     <b><i class="fa fa-clock text-primary"></i>
-                                        {{ date('d/m/Y H:i', strtotime($location['localtime'])) }}</b>
+                                        {{ date('d/m/Y ', strtotime($location['localtime'])) }}</b>
                                     <div class="d-flex flex-row gap-1">
-                                        <a role="button" href="" class="btn btn-success"><i
-                                                class="fa fa-right-left"></i>
+                                        <a role="button"
+                                            href="{{ url('/previsao/compare?cep1=&cidade1=' . $location['name'] . '&cep2=&cidade2=') }}"
+                                            class="btn btn-success"><i class="fa fa-right-left"></i>
                                             Comparar</a>
                                         <div>
                                             <form action="{{ route('previsao.nova') }}" method="post">
@@ -181,7 +182,8 @@
                                 </div>
                                 <div class="row mt-2 w-100 p-0">
                                     <div class="col-md-4 p-1">
-                                        <div class="previsao-atual h-10vh d-flex flex-column justify-content-center text-center">
+                                        <div
+                                            class="previsao-atual h-10vh d-flex flex-column justify-content-center text-center">
                                             <b class="text-warning">Índice UV</b>
                                             <h4>
                                                 {{ $current['uv_index'] }}
@@ -189,7 +191,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4 p-1">
-                                        <div class="previsao-atual h-10vh d-flex flex-column justify-content-center text-center">
+                                        <div
+                                            class="previsao-atual h-10vh d-flex flex-column justify-content-center text-center">
                                             <b class="text-primary"><i class="fa fa-wind"></i> Vento</b>
                                             <h5>
                                                 {{ $current['wind_speed'] }} Km/h
@@ -198,17 +201,28 @@
                                     </div>
                                     <div class="col-md-4 p-1">
                                         <div
-                                            class="previsao-atual h-10vh d-flex justify-content-center flex-column text-center">
+                                            class="previsao-atual h-10vh d-flex justify-content-center align-items-center flex-column text-center">
+                                            <b class="text-primary"><i class="fa fa-clock"></i> Horário Local</b>
                                             @if ($current['is_day'] == 'yes')
-                                                <i class="fa fs-4 fa-sun text-warning"></i>
+                                                <div class="">
+
+                                                    <span class="fs-5 fw-semibold">
+                                                        <i class="fa fs-5 fa-sun text-warning"></i>
+                                                        {{ date('H:i', strtotime($location['localtime'])) }}
+                                                    </span>
+                                                </div>
                                             @else
-                                                <i class="fa fs-4 fa-moon text-warning"></i>
+                                               
+                                                <span class="fs-5 fw-semibold">
+                                                    <i class="fa fs-5 fa-moon text-warning"></i>
+                                                    {{ date('H:i', strtotime($location['localtime'])) }}</span>
                                             @endif
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 p-1">
-                                        <div class="previsao-atual h-10vh d-flex flex-column  justify-content-center text-center">
+                                        <div
+                                            class="previsao-atual h-10vh d-flex flex-column  justify-content-center text-center">
                                             <b class="text-primary"> <i class="fa fa-eye"></i> Visibilidade</b>
                                             <h5>
                                                 {{ $current['visibility'] }} Km
@@ -216,7 +230,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 p-1">
-                                        <div class="previsao-atual h-10vh d-flex flex-column justify-content-center text-center">
+                                        <div
+                                            class="previsao-atual h-10vh d-flex flex-column justify-content-center text-center">
                                             <b class="text-primary"><i class="fa fa-droplet">
                                                 </i> Umidade</b>
                                             <h5>
@@ -231,38 +246,7 @@
 
                         </div>
 
-                        {{-- <div class="col-md-6">
-                        <div class="container-previsao h-60vh d-flex flex-column justify-content-center align-items-center">
-                            <div class="col-12 d-flex flex-column align-items-center">
-                                <h5>Compare as previsões do tempo</h5>
-                                <form action="{{ route('previsao.atual') }}" id="pesquisaPrevisao" method="get">
 
-                                    <div
-                                        class="d-flex justify-content-start align-items-center flex-wrap flex-row  w-100 gap-2">
-                                        <div class="d-flex flex-column ">
-                                            <label for="cep"><b>Cep</b></label>
-                                            <input type="text" class="form-control w-100" name="cep" id="cep">
-                                        </div>
-
-                                        <div class="d-flex flex-row gap-2">
-                                            <div>
-                                                <label for="cep"><b>Cidade</b></label>
-                                                <input type="text" class="form-control" name="cidade" id="cidade">
-                                            </div>
-                                            <div class="d-flex flex-row align-items-center">
-                                                <button type="submit" class="btn br-2  btn-success">
-                                                    <i class="fa fa-magnifying-glass"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div> --}}
                     </div>
                 @endisset
             </div>

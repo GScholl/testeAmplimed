@@ -79,7 +79,7 @@ class PrevisaoController extends Controller
                 $previsoes['segundaPrevisao']['mensagem_traduzida'] = $this->getInfoErrorTraduzido($previsoes['segundaPrevisao']['error']['code']);
             }
         }
-        
+
         return view('previsao.compare', $previsoes);
     }
 
@@ -149,7 +149,16 @@ class PrevisaoController extends Controller
         $previsao->descricao_traduzida = CondicaoClimatica::where('codigo', '=', $previsao->codigo_previsao)->first()->descricao ?? null;
         return view('previsao.previsao', compact('previsao'));
     }
+    public function excluirHistorico($id){
+        $pesquisa = Pesquisa::find($id);
 
+       return response()->json($pesquisa->delete());
+    }
+    public function pesquisarHistoricos(Request $request){
+       $query = $request->input('query');
+        $historicos = Pesquisa::where('query', 'like', "%{$query}%")->orderBy('created_at', 'desc')->get();
+        return response()->json($historicos);
+    }
     public function getCoordenadasIp()
     {
 
@@ -171,45 +180,5 @@ class PrevisaoController extends Controller
         return "Houve um erro desconhecido, por favor tente novamente mais tarde";
     }
 
-    public function getDados()
-    {
-
-        return [
-            "request" => [
-                "type" => "City",
-                "query" => "Chapecó, Brasil",
-                "language" => "en",
-                "unit" => "m",
-            ],
-            "location" => [
-                "name" => "Chapecó",
-                "country" => "Brasil",
-                "region" => "Santa Catarina",
-                "lat" => "-27.083",
-                "lon" => "-52.983",
-                "timezone_id" => "America/Sao_Paulo",
-                "localtime" => "2024-04-28 13:31",
-                "localtime_epoch" => 1714311060,
-                "utc_offset" => "-3.0",
-            ],
-            "current" => [
-                "observation_time" => "04:31 PM",
-                "temperature" => 25,
-                "weather_code" => 296,
-                "weather_icons" => [0 => "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0016_thundery_showers.png"],
-                "weather_descriptions" => [0 => "thunderstorm"],
-                "wind_speed" => 15,
-                "wind_degree" => 340,
-                "wind_dir" => "NNW",
-                "pressure" => 1013,
-                "precip" => 1,
-                "humidity" => 100,
-                "cloudcover" => 75,
-                "feelslike" => 28,
-                "uv_index" => 6,
-                "visibility" => 5,
-                "is_day" => "yes",
-            ],
-        ];
-    }
+ 
 }

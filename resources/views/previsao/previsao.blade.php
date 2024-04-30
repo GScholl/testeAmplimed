@@ -84,10 +84,17 @@
                                 <div class="col-md-4 p-1">
                                     <div
                                         class="previsao-atual h-10vh d-flex justify-content-center flex-column text-center">
+                                        <b class="text-primary"><i class="fa fa-clock"></i> Horário Local</b>
                                         @if ($previsao->dia_noite)
-                                            <i class="fa fs-4 fa-sun text-warning"></i>
+                                            <span class="fs-5 fw-semibold">
+                                                <i class="fa fs-5 fa-sun text-warning"></i>
+                                                {{ date('H:i', strtotime($previsao->data_local)) }}
+                                            </span>
                                         @else
-                                            <i class="fa fs-4 fa-moon text-warning"></i>
+                                            <span class="fs-5 fw-semibold">
+                                                <i class="fa fs-5 fa-moon text-warning"></i>
+                                                {{ date('H:i', strtotime($previsao->data_local)) }}
+                                            </span>
                                         @endif
                                     </div>
                                 </div>

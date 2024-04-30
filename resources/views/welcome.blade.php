@@ -30,7 +30,7 @@
 
                             <a href="{{ route('previsao.atual') }}" role="button" class="btn fw-bold btn-light"><i
                                     class="fa text-warning fa-cloud-sun-rain"></i> <span> Previsão Atual </span></a>
-                            <a href="" role="button" class="btn fw-bold btn-light"> <i
+                            <a href="{{ route('previsao.compare') }}" role="button" class="btn fw-bold btn-light"> <i
                                     class="fa fa-right-left text-primary"></i> Comparar Previsões </a>
                             <a href="{{ route('previsao.listar') }}" role="button" class="btn fw-bold btn-light"> <i
                                     class="fa fa-list text-success"></i>

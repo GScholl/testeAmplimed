@@ -12,3 +12,5 @@ Route::post('previsao/nova', [PrevisaoController::class, 'nova'])->name("previsa
 Route::get('previsao/listar', [PrevisaoController::class, 'previsoesSalvas'])->name('previsao.listar');
 Route::get('previsao/ver/{id}', [PrevisaoController::class, 'previsaoSalva'])->name('previsao.salva');
 Route::get('previsao/compare', [PrevisaoController::class, 'compararPrevisoes'])->name("previsao.compare");
+Route::get('/previsao/historicos/pesquisar', [PrevisaoController::class, 'pesquisarHistoricos'])->name("previsao.historicos.pesquisar");
+Route::get('/previsao/historicos/delete/{id}', [PrevisaoController::class, 'excluirHistorico'])->name("previsao.historicos.excluir");

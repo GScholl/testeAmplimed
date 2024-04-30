@@ -28,14 +28,14 @@
                     <li><a href="{{ route('previsao.atual') }}"
                             class="{{ Request::is('previsao/atual') ? 'link-primary' : 'link-secondary' }} nav-link px-2 ">Previsão
                             Atual</a></li>
-                    <li><a href="{{ route('previsao.compare') }}" class="nav-link px-2 link-secondary">Comparar
-                            previsões</a></li>
+                    <li><a href="{{ route('previsao.compare') }}" class="nav-link px-2 {{ Request::is('previsao/compare') ? 'link-primary' : 'link-secondary' }} ">Comparar
+                            Previsões</a></li>
                     <li><a href="{{ route('previsao.listar') }}"
                             class=" {{ Request::is('previsao/listar') ? 'link-primary' : 'link-secondary' }} nav-link px-2 ">Previsões
                             Salvas</a></li>
                 </ul>
 
-
+   
 
                 <div class="dropdown text-end">
                     <ul class="nav">
@@ -78,9 +78,9 @@
     </div>
     <footer>
         <script src="{{ asset('jquery/jquery.mask.min.js') }}"></script>
-        <script src="{{ asset('jquery/additional-methods.min.js') }}"></script>
+      
         <script src="{{ asset('jquery/jquery.validate.min.js') }}"></script>
-
+        <script src="{{ asset('jquery/additional-methods.min.js') }}"></script>
         <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('js/utils.js') }}"></script>
         @yield('scripts')
