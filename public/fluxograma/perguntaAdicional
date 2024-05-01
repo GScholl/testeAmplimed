@@ -1,0 +1,1 @@
+O elevador do fluxograma responde primeiro a chamadas internas, e após isso chamadas externas, portanto ele levará em consideração o que foi chamado antes, ou se for ao mesmo tempo, irá levar em consideração o pedido interno.
