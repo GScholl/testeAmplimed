@@ -7,6 +7,8 @@ integração da API do WeatherStack para previsão do tempo utilizando Laravel, 
     <img src="https://github.com/github/explore/raw/main/topics/bootstrap/bootstrap.png" alt="Bootstrap" height="50" />
 </p>
 
+## Fluxograma
+[Fluxograma do elevador ](https://github.com/GScholl/testeAmplimed/blob/main/public/fluxograma/fluxograma%20elevador.pdf "Fluxograma do elevador")
 ## Funcionalidades
 
 - Pesquisar Via CEP (integrado com API do ViaCep) ou cidade a previsão atual
@@ -37,12 +39,10 @@ integração da API do WeatherStack para previsão do tempo utilizando Laravel, 
 ![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif3.gif)
 ![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif1.gif)
 ![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif2.gif)
+![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif7.gif)
 ![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif4.gif)
 ![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif5.gif)
 ![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif6.gif)
-
-## Exemplo
-
 
 
 ## Contribuição
