@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PrevisaoController extends Controller
 {
-    private $acessToken = 'b3188e324b830cf1240371528ff82881';
+    private $acessToken = 'af329dc4a11ed8f717e3d164f2daf60b';
     private $apiUrl = 'http://api.weatherstack.com/';
 
     private $errorCodes = [
@@ -43,8 +43,10 @@ class PrevisaoController extends Controller
         } else {
             $previsao =  $this->getPrevisaoAtual($this->getCoordenadasIp());
         }
+        if (isset($previsao['current']['weather_code'])) {
 
-        $previsao['current']['descricao_traduzida'] = CondicaoClimatica::where('codigo', '=', $previsao['current']['weather_code'])->first()->descricao ?? null;
+            $previsao['current']['descricao_traduzida'] = CondicaoClimatica::where('codigo', '=', $previsao['current']['weather_code'])->first()->descricao ?? null;
+        }
         if (isset($previsao['success']) && !$previsao['success']) {
             $previsao['mensagem_traduzida'] = $this->getInfoErrorTraduzido($previsao['error']['code']);
         }
@@ -149,13 +151,15 @@ class PrevisaoController extends Controller
         $previsao->descricao_traduzida = CondicaoClimatica::where('codigo', '=', $previsao->codigo_previsao)->first()->descricao ?? null;
         return view('previsao.previsao', compact('previsao'));
     }
-    public function excluirHistorico($id){
+    public function excluirHistorico($id)
+    {
         $pesquisa = Pesquisa::find($id);
 
-       return response()->json($pesquisa->delete());
+        return response()->json($pesquisa->delete());
     }
-    public function pesquisarHistoricos(Request $request){
-       $query = $request->input('query');
+    public function pesquisarHistoricos(Request $request)
+    {
+        $query = $request->input('query');
         $historicos = Pesquisa::where('query', 'like', "%{$query}%")->orderBy('created_at', 'desc')->get();
         return response()->json($historicos);
     }
@@ -179,6 +183,4 @@ class PrevisaoController extends Controller
         }
         return "Houve um erro desconhecido, por favor tente novamente mais tarde";
     }
-
- 
 }

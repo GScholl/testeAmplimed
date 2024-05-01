@@ -209,7 +209,7 @@ span.error-message {
 
 .bg-200,
 .bg-386,
-.bg-386 {
+.bg-386,.bg-389 {
     background-image: radial-gradient(
             at 57% 53%,
             hsl(61, 61%, 26%) 0,
