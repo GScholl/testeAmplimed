@@ -9,6 +9,8 @@ integração da API do WeatherStack para previsão do tempo utilizando Laravel, 
 
 ## Fluxograma
 [Fluxograma do elevador ](https://github.com/GScholl/testeAmplimed/blob/main/public/fluxograma/fluxograma%20elevador.pdf "Fluxograma do elevador")
+<br>
+[Resposta da pergunta adicional ](https://github.com/GScholl/testeAmplimed/blob/main/public/fluxograma/perguntaAdicional "Pergunta adicional")
 ## Funcionalidades
 
 - Pesquisar Via CEP (integrado com API do ViaCep) ou cidade a previsão atual
