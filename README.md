@@ -34,7 +34,12 @@ integração da API do WeatherStack para previsão do tempo utilizando Laravel, 
 - Atualizar a variavel ``` $acessToken ``` dentro do arquivo ```PrevisaoController.php```  e utilizar a sua chave de acesso da Api do weatherStack
 
 ## Uso
-
+![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif3.gif)
+![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif1.gif)
+![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif2.gif)
+![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif4.gif)
+![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif5.gif)
+![Exemplo do sistema](https://raw.githubusercontent.com/GScholl/testeAmplimed/main/public/img/gifs/gif6.gif)
 
 ## Exemplo
 
