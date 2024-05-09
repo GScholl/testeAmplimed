@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PrevisaoController extends Controller
 {
-    private $acessToken = 'af329dc4a11ed8f717e3d164f2daf60b';
+    private $acessToken = '';
     private $apiUrl = 'http://api.weatherstack.com/';
 
     private $errorCodes = [
